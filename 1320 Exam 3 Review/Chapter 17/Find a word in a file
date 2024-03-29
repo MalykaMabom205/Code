@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    char mystr[15]; // Array to store the word entered by the user
+    char bigline[200]; // Array to store a line read from the file
+    char *s; // Pointer to store the result of the search
+    int count = 0; // Variable to keep track of the number of occurrences found
+
+    FILE *fp = fopen("input2.txt", "r"); // Open the file in read mode
+
+    if (fp == NULL) {
+        printf("File not found\n");
+        exit(1);
+    }
+
+    printf("Please enter the word to search in the file\n");
+    scanf("%s", mystr); // Read a word from the user
+
+    // Read a line from the file and store it in 'bigline'
+    if (fgets(bigline, 200, fp) != NULL) {
+        puts(bigline); // Print the line read from the file (optional)
+        s = strstr(bigline, mystr); // Search for 'mystr' in 'bigline'
+
+        if (s != NULL) {
+            printf("\nWord is found\n");
+            count++;
+            printf("bigline = %p, s = %p \n", bigline, s);
+        }
+    }
+
+    if (count == 0) {
+        printf("\nWord not found\n");
+    }
+
+    fclose(fp); // Close the file
+    return 0;
+}
+
