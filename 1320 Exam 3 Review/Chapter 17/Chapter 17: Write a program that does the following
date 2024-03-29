@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    char ch; // Variable to store each character read from the file
+    FILE *fp; // File pointer
+
+    // Open the file "myfiles.txt" in read mode
+    fp = fopen("myfiles.txt", "r");
+
+    // Check if the file pointer is NULL (file opening failed)
+    if (fp == NULL) {
+        printf("Can't open the file.\n");
+        exit(1); // Exit the program with an error code
+    }
+
+    // Read the first character from the file
+    ch = getc(fp);
+
+    // Loop until the end of file (EOF) is reached
+    while (ch != EOF) {
+        putchar(ch); // Print the character to the console
+        ch = getc(fp); // Read the next character from the file
+    }
+
+    // Close the file
+    fclose(fp);
+
+    return 0; // Exit the program successfully
+}
