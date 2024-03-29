@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main() {
+    char buffer[1024]; // Buffer to store each line read from the file
+    char *record, *line; // Pointers for parsing CSV records and lines
+    FILE *fstream, *fw; // File pointers for input and output files
+    int k = 0; // Variable to store the sum of numbers
+
+    fstream = fopen("sum.csv", "r"); // Open the input CSV file in read mode
+
+    if (fstream == NULL) {
+        printf("\n File opening failed ");
+        return -1;
+    }
+
+    while ((line = fgets(buffer, sizeof(buffer), fstream)) != NULL) {
+        record = strtok(line, ","); // Split the line into tokens using ',' as delimiter
+
+        while (record != NULL) {
+            printf(" Record: %s", record);
+            k = k + atoi(record); // Convert the token to an integer and add it to the sum
+            record = strtok(NULL, ","); // Get the next token
+        }
+    }
+
+    printf(" Sum is: %d", k); // Print the sum
+
+    fw = fopen("output.csv", "w"); // Open the output CSV file in write mode
+    fprintf(fw, "%d", k); // Write the sum to the output file
+    printf("\n Output Written To File");
+
+    fclose(fw); // Close the output file
+    fclose(fstream); // Close the input file
+
+    return 0;
+}
+
+
