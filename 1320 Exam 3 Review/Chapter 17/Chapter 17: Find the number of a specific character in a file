@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    char mych, ch; // Declare variables to store user input character and file character
+    int counter = 0; // Initialize counter to keep track of character occurrences
+    FILE *fp = fopen("myfiles.txt", "r"); // Open the file in read mode
+
+    if (fp == NULL) { // Check if file opening failed
+        printf("Can't open the file.\n"); // Print error message
+        exit(1); // Exit the program with an error code
+    }
+
+    printf("Please input a character: "); // Prompt user to input a character
+    scanf("%c", &mych); // Read the character entered by the user
+
+    ch = getc(fp); // Read the first character from the file
+
+    while (ch != EOF) { // Loop until the end of file (EOF) is reached
+        if (ch == mych) // Check if the read character matches the user input character
+            counter++; // Increment counter if there's a match
+        ch = getc(fp); // Read the next character from the file
+    }
+
+    // Print the total count of occurrences of the specified character in the file
+    printf("In total, there are %d characters of '%c'.\n", counter, mych);
+
+    fclose(fp); // Close the file
+    return 0; // Exit the program successfully
+}
