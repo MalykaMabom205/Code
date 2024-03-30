@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main(void) {
+    char mych[2];
+
+    printf("Enter a character: ");
+    scanf(" %c", &mych[0]);  // Adding a space before %c to consume the newline character
+
+    printf("Enter another character: ");
+    mych[1] = getchar();  // This reads the newline character after the first scanf
+
+    printf("The char array has %c and %c.\n", mych[0], mych[1]);
+    return 0;
+}
