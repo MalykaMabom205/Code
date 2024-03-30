@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char c[1000];
+    FILE *fptr;
+
+    // Open the input file "input.txt" in read mode
+    if ((fptr = fopen("input.txt", "r")) == NULL) {
+        printf("Error! Opening file"); // Print an error message if file opening fails
+        exit(1); // Exit the program with an error code
+    }
+
+    int num = 0; // Initialize the sum variable
+
+    // Read integers from the file until the end of file (EOF) is reached
+    while (!feof(fptr)) {
+        int temp = 0;
+        fscanf(fptr, "%d", &temp); // Read an integer from the file
+        num += temp; // Add the integer to the sum
+    }
+
+    // Print the sum to the console
+    printf("Sum is: %d", num);
+
+    fclose(fptr); // Close the input file
+
+    // Open the output file "output.txt" in write mode
+    FILE *fw = fopen("output.txt", "w");
+
+    // Write the sum to the output file
+    fprintf(fw, "Sum is: %d\n", num);
+
+    fclose(fw); // Close the output file
+
+    return 0; // Exit the program successfully
+}
+
+
